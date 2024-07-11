@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        return view('dashboard.user.index', [
+            'title' => 'User Management',
+            'user' => User::paginate(5),
+            'roles' => Role::all()
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users',
+            'password' => 'required|max:255'
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        $user = User::create($validatedData);
+        $user->assignRole($request->roles);
+        return redirect('/dashboard/data-user-management')->with('success', 'Data User Berhasil di Tambahkan');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request,  $id)
+    {
+        $validator = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required',
+            'password' => 'nullable|min:2'
+        ]);
+        if ($request->filled('password')) {
+            $validator['password'] = Hash::make($validator['password']);
+        } else {
+            // Jika password tidak diisi, hapus password dari array validator
+            unset($validator['password']);
+        }
+
+
+        try {
+            $user = User::findOrFail($id);
+            $user->roles()->detach();
+            $user->update($validator);
+
+            if ($request->filled('roles')) {
+                $user->assignRole($request->roles); // Menggunakan syncRoles untuk mengganti peran yang ada
+            }
+
+            return redirect('/dashboard/data-user-management')->with('success', 'Data User Berhasil di Update');
+        } catch (\Exception $e) {
+            return redirect('/dashboard/data-user-management')->with('error', 'Gagal MengUpdate User. Silakan coba lagi.');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            User::destroy($user->id);
+            return redirect('/dashboard/data-user-management')->with('success', 'Data User Berhasil di Hapus');
+        } catch (\Exception $e) {
+            return redirect('/dashboard/data-user-management')->with('error', 'Gagal menghapus User. Silakan coba lagi.');
+        }
+    }
+}

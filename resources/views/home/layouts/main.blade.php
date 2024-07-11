@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TokoDzul | {{ $title }}</title>
+    <title>BU8 | {{ $title }}</title>
 
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -57,13 +57,6 @@
                                 <div class="widget footer-about-us">
                                     <img src="img/logo.png" alt="" class="logo">
                                     <p class="mb-30">TokoDzul Shop Adalah Sebuah Website E-Commerce Sederhana</p>
-                                    <div class="footer-socials">
-                                        <div class="social-icons nobase">
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div> <!-- end about us -->
                         </div>

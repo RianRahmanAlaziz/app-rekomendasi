@@ -24,6 +24,14 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            $user = Auth::user();
+            if ($user->hasRole('Admin')) {
+                return redirect()->intended('/dashboard');
+            } elseif ($user->hasRole('User')) {
+                return redirect()->intended('/');
+            }
+
+            // Tambahkan pengalihan default jika tidak ada role yang sesuai
             return redirect()->intended('/dashboard');
         }
 

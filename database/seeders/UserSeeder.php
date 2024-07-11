@@ -35,10 +35,10 @@ class UserSeeder extends Seeder
         );
         $roleuser = Role::updateOrCreate(
             [
-                'name' => 'Karyawan'
+                'name' => 'User'
             ],
             [
-                'name' => 'Karyawan'
+                'name' => 'User'
             ]
         );
         $permission = Permission::updateOrCreate(

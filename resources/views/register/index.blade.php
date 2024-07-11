@@ -1,54 +1,77 @@
-@extends('home.layouts.main')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('container')
-    <div class="row justify-content-center">
-        <div class="col-lg-5 ">
-            <main class="form-registration w-100 m-auto">
-                <h1 class="h3 mb-3 fw-normal text-center">Registration Form</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/index-login.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:400,400i,600,700' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>BU8 | Register</title>
+</head>
+
+<body class="bl">
+    <div class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if (session()->has('loginError'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('loginError') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <header>Register</header>
                 <form action="/register" method="POST">
                     @csrf
-                    <div class="form-floating ">
-                        <input type="text" name="name"
-                            class="form-control rounded-top @error('name')is-invalid @enderror" id="name"
-                            placeholder="Name" required value="{{ old('name') }}">
-                        <label for="name">Name</label>
+                    <div class="field input-field">
+                        <input type="name" name="name" class="input @error('name') is-invalid @enderror"
+                            id="name" placeholder="Name" autofocus required value="{{ old('name') }}">
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-
-                    <div class="form-floating">
-                        <input type="email" name="email" class="form-control @error('email')is-invalid @enderror"
-                            id="email" placeholder="name@example.com" required value="{{ old('email') }}">
-                        <label for="email">Email address</label>
+                    <div class="field input-field">
+                        <input type="email" name="email" class="input @error('email') is-invalid @enderror"
+                            id="email" placeholder="Email" autofocus required value="{{ old('email') }}">
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-
-                    <div class="form-floating">
-                        <input type="password" name="password"
-                            class="form-control rounded-bottom @error('password')is-invalid @enderror" id="password"
-                            placeholder="Password" required>
-                        <label for="password">Password</label>
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="field input-field">
+                        <input type="password" name="password" class="password" id="password" placeholder="Password"
+                            required>
+                        <i class='bx bx-hide eye-icon'></i>
                     </div>
 
-                    <button class="w-100 btn btn-lg btn-primary mt-3 dftr" type="submit">Register</button>
+                    <div class="field button-field">
+                        <button type="submit">Register</button>
+                    </div>
                 </form>
-                <small class="d-block text-center mt-3">
-                    Already Registered? <a href="/login">Login</a>
-                </small>
-            </main>
 
+
+            </div>
         </div>
     </div>
-@endsection
+
+
+    <script src="/assets/js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

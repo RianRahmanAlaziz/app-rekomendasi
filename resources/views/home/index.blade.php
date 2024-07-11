@@ -4,26 +4,25 @@
     <!-- Hero Slider -->
     <section class="hero-wrap text-center relative">
         <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated">
-            {{-- @foreach ($sliders as $slider)
-                <div class="hero-slide overlay img-fluid" style="background-image:url(img/slider/{{ $slider->gambar }})">
+            @foreach ($sliders as $slider)
+                <div class="hero-slide overlay img-fluid"
+                    style="background-image:url(assets/img/slider/{{ $slider->gambar }})">
                     <div class="container">
                         <div class="hero-holder">
                             <div class="hero-message">
                                 <h1 class="hero-title nocaps">{{ $slider->nama_slider }}</h1>
                                 <h2 class="hero-subtitle lines">{{ $slider->deskripsi }}</h2>
-
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach --}}
+            @endforeach
         </div>
     </section> <!-- end hero slider -->
 
     <!-- Trendy Products -->
-    <section class="section-wrap-sm new-arrivals pb-50">
+    <section class="section-wrap-sm new-arrivals pb-50 pt-50">
         <div class="container">
-
             <div class="row heading-row">
                 <div class="col-md-12 text-center">
                     <h2 class="heading bottom-line">
@@ -31,9 +30,7 @@
                     </h2>
                 </div>
             </div>
-
             <div class="row items-grid">
-
                 @foreach ($pupuk as $item)
                     <div class="col-md-3 col-xs-6">
                         <div class="product-item hover-trigger">
@@ -93,13 +90,9 @@
                                             <a href="#"></a>
                                         </span>
                                         <h3 class="product-title">
-                                            <a href="/shop/{{ $item->slug }}">{{ $item->nama }}</a>
+                                            <a href="/tanaman/{{ $item->slug }}">{{ $item->nama }}</a>
                                         </h3>
-                                        <span class="price">
-                                            <ins>
-                                                <span class="amount">@rupiah($item->harga)</span>
-                                            </ins>
-                                        </span>
+
                                     </div>
                                 </div>
                             </div>

@@ -51,11 +51,11 @@
 
 
                                 <li class="dropdown">
-                                    <a href="/shop">Tanaman</a>
+                                    <a href="/tanaman">Tanaman</a>
                                     <i class="fa fa-angle-down dropdown-trigger"></i>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="/shop">Pupuk</a>
+                                    <a href="/pupuk">Pupuk</a>
                                     <i class="fa fa-angle-down dropdown-trigger"></i>
                                 </li>
                                 <!-- end elements -->
@@ -80,24 +80,20 @@
                     <div class="flex-child flex-right nav-right hidden-sm hidden-xs">
                         <ul>
                             @auth
-                                <li class="nav-register dropdown">
-                                    <a href="/dashboard">{{ auth()->user()->username }}</a>
-
-                                    {{-- <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                          aria-labelledby="userDropdown">
-                          <li>
-                              <a href="/">
-                              Home
-                              </a>
-                          </li>
-  
-                          <li>
-                            <a href="#" data-toggle="modal" data-target="#logoutModal">
-                              Logout
-                          </a>
-                          </li>
-  
-                      </ul> --}}
+                                <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button class=" btn-link p-0" style="background: none; border: none;"
+                                            type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="#000000" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </li>
                             @else
                                 <li class="nav-login">

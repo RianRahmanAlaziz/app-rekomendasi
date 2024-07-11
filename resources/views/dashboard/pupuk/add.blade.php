@@ -1,13 +1,13 @@
-<div class="modal fade" id="modal-pupuk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<!-- Modal -->
+<div class="modal fade" id="addkaryawan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Add Data Pupuk</h5>
             </div>
-            <div class="modal-body">
-                <main class="form-signin w-100 m-auto">
-                    <h1 class="h3 mb-3 fw-normal text-center">Tambah Data Pupuk</h1>
-                    <form action="/dashboard/data-pupuk" method="POST" enctype="multipart/form-data">
+            <form action="/dashboard/data-pupuk" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <main class="form-signin w-100 m-auto">
                         @csrf
                         <div class="form-group">
                             <label for="nama">Nama Pupuk</label>
@@ -19,16 +19,21 @@
                                 </div>
                             @enderror
                         </div>
-
-                        <div class="form-group">
-                            <label for="kandungan">Kandungan Nutrisi</label>
-                            <input type="text" class="form-control @error('kandungan') is-invalid @enderror"
-                                name="kandungan" id="kandungan" required autofocus value="{{ old('kandungan') }}">
-                            @error('kandungan')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                        <input type="text" class="form-control" name="slug" id="slug" hidden
+                            value="{{ old('slug') }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" class="form-control  @error('gambar') is-invalid @enderror"
+                                        name="gambar" id="gambar">
+                                    @error('gambar')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
-                            @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
@@ -42,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" id="" cols="5" rows="5"
+                            <textarea name="deskripsi" id="deskripsi" cols="5" rows="5"
                                 class="form-control @error('deskripsi') is-invalid @enderror"></textarea>
                             @error('deskripsi')
                                 <div class="invalid-feedback">
@@ -50,39 +55,38 @@
                                 </div>
                             @enderror
                         </div>
-
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" class="form-control  @error('gambar') is-invalid @enderror"
-                                name="gambar" id="gambar">
-                            @error('gambar')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <button class="w-100 btn btn-lg btn-primary mt-5 dftr" type="submit">Tambah</button>
-                    </form>
-
-                </main>
-            </div>
+                    </main>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save</button>
+                </div>
+            </form>
         </div>
-
     </div>
 </div>
-</div>
+
 <script>
-    const title = document.querySelector('#title');
+    const nama = document.querySelector('#nama');
     const slug = document.querySelector('#slug');
 
-    title.addEventListener('change', function() {
-        fetch('/dashboard/posts/checkSlug?title=' + title.value)
-            .then(response => response.json())
-            .then(data => slug.value = data.slug)
+    nama.addEventListener('change', function() {
+        fetch('/dashboard/data-pupuk/checkSlug?nama=' + nama.value)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.slug) {
+                    slug.value = data.slug;
+                } else {
+                    throw new Error('Invalid JSON response');
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
     });
-
-    document.addEventListener('trix-file-accept', function(e) {
-        e.preventDefault();
-    })
 </script>

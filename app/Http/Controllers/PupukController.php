@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pupuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PupukController extends Controller
 {
@@ -15,7 +16,7 @@ class PupukController extends Controller
     {
         return view('dashboard.pupuk.index', [
             'title' => 'Data Pupuk',
-            'pupuks' => Pupuk::all()
+            'pupuks' => Pupuk::paginate(5)
         ]);
     }
 
@@ -34,7 +35,7 @@ class PupukController extends Controller
     {
         $validator = $request->validate([
             'nama' => 'required',
-            'kandungan' => 'required',
+            'slug' => 'required|unique:pupuks',
             'harga' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required|image|mimes:jpg,png,jpeg,webp',
@@ -46,7 +47,6 @@ class PupukController extends Controller
             $gambar->move('assets/img/pupuk', $nama_gambar);
             $validator['gambar'] = $nama_gambar;
         }
-
         Pupuk::create($validator);
 
         return redirect('/dashboard/data-pupuk')->with('success', 'Data Pupuk Baru Berhasil di Tambahkan');
@@ -74,14 +74,15 @@ class PupukController extends Controller
     public function update(Request $request,  $id)
     {
         $pupuk = Pupuk::findOrFail($id);
-
         $rules = [
             'nama' => 'required',
-            'kandungan' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
         ];
 
+        if ($request->slug != $pupuk->slug) {
+            $rules['slug'] = 'required|unique:tanamans';
+        }
         $validator = $request->validate($rules);
 
         if ($request->has('gambar')) {
@@ -110,5 +111,12 @@ class PupukController extends Controller
         Pupuk::destroy($pupuk->id);
 
         return redirect('/dashboard/data-pupuk')->with('success', 'Data Pupuk Berhasil di Hapus');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Pupuk::class, 'slug', $request->nama);
+
+        return response()->json(['slug' => $slug]);
     }
 }
