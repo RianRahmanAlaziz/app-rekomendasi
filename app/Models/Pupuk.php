@@ -14,7 +14,7 @@ class Pupuk extends Model
 
     public function usia()
     {
-        return $this->hasMany(Usia::class);
+        return $this->belongsTo(Usia::class);
     }
 
     public function sluggable(): array

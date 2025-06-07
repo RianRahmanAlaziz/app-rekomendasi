@@ -37,8 +37,6 @@ class UsiaController extends Controller
 
         $validator = $request->validate([
             'nama' => 'required',
-            'pupuk_id' => 'required',
-            'deskripsi' => 'required',
         ]);
 
         Usia::create($validator);
@@ -69,8 +67,6 @@ class UsiaController extends Controller
         $usia = Usia::findOrFail($id);
         $rules = [
             'nama' => 'required',
-            'pupuk_id' => 'required',
-            'deskripsi' => 'required',
         ];
         $validator = $request->validate($rules);
 

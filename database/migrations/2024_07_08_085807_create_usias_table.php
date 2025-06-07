@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('usias', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->foreignId('pupuk_id');
-            $table->text('deskripsi');
             $table->timestamps();
         });
     }

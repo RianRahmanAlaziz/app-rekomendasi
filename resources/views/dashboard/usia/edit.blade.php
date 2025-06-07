@@ -12,49 +12,19 @@
                         <main class="form-signin w-100 m-auto">
                             @method('PUT')
                             @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="nama">Usia Tanam</label>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                            name="nama" id="nama1" required autofocus
-                                            value="{{ old('nama', $usia->nama) }}">
-                                        @error('nama')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" name="slug" id="slug1"
-                                    value="{{ old('slug', $usia->slug) }}">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="pupuk_id">Pupuk</label>
-                                        <select class="form-select" name="pupuk_id">
-                                            <option disabled selected>Pilih Pupuk</option>
-                                            @foreach ($pupuk as $pupuk)
-                                                @if (old('pupuk_id', $usia->pupuk_id) == $pupuk->id)
-                                                    <option value="{{ $pupuk->id }}" selected>{{ $pupuk->nama }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $pupuk->id }}">{{ $pupuk->nama }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="deskripsi" id="deskripsi" cols="5" rows="5"
-                                    class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $usia->deskripsi) }}</textarea>
-                                @error('deskripsi')
+                                <label for="nama">Usia Tanam</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                    name="nama" id="nama1" required autofocus
+                                    value="{{ old('nama', $usia->nama) }}">
+                                @error('nama')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+                            <input type="text" class="form-control" name="slug" id="slug1"
+                                value="{{ old('slug', $usia->slug) }}" hidden>
                         </main>
                     </div>
                     <div class="modal-footer">

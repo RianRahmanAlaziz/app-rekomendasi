@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('pupuks', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->foreignId('usia_id');
             $table->string('slug')->unique();
             $table->text('deskripsi');
             $table->string('gambar');
             $table->integer('harga');
+            $table->integer('rating');
             $table->timestamps();
         });
     }

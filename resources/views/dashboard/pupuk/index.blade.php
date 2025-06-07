@@ -50,6 +50,10 @@
                                         </th>
                                         <th class="text-secondary text-xs font-weight-semibold opacity-7">Nama Pupuk
                                         </th>
+                                        <th class="text-secondary text-xs font-weight-semibold opacity-7">Usia
+                                        </th>
+                                        <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Rating
+                                        </th>
                                         <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                             Harga</th>
                                         <th class="text-secondary text-xs font-weight-semibold opacity-7">
@@ -76,6 +80,14 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td class="align-middle ">
+                                                <span
+                                                    class="text-secondary text-sm font-weight-normal">{{ $item->usia->nama }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span
+                                                    class="text-secondary text-sm font-weight-normal">{{ $item->rating }}</span>
+                                            </td>
                                             <td class="align-middle text-center">
                                                 <span
                                                     class="text-secondary text-sm font-weight-normal">@rupiah($item->harga)</span>
@@ -96,7 +108,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6"
+                                            <td colspan="7"
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Data Kosong</td>
                                         </tr>

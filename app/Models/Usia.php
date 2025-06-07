@@ -13,7 +13,7 @@ class Usia extends Model
 
     public function pupuk()
     {
-        return $this->belongsTo(Pupuk::class);
+        return $this->hasMany(Pupuk::class);
     }
     public function sluggable(): array
     {

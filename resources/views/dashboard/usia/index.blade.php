@@ -50,10 +50,6 @@
                                         </th>
                                         <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Usia Tanam
                                         </th>
-                                        <th class=" text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                            Pupuk</th>
-                                        <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                            Deskripsi</th>
                                         <th class="text-center text-secondary text-xs font-weight-semibold opacity-7">Aksi
                                         </th>
                                     </tr>
@@ -68,14 +64,6 @@
                                                 <span
                                                     class="text-secondary text-sm font-weight-normal">{{ $item->nama }}</span>
                                             </td>
-                                            <td class="align-middle ">
-                                                <span
-                                                    class="text-secondary text-sm font-weight-normal">{{ $item->pupuk->nama }}</span>
-                                            </td>
-                                            <td class="align-middle ">
-                                                <span
-                                                    class="text-secondary text-sm font-weight-normal">{{ \Illuminate\Support\Str::limit($item->deskripsi, 50) }}</span>
-                                            </td>
                                             <td class="text-center align-middle bg-transparent border-bottom">
                                                 <button type="button" class="btn" data-bs-toggle="modal"
                                                     data-bs-target="#editpegawai-{{ $item->id }}"><i
@@ -88,7 +76,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6"
+                                            <td colspan="3"
                                                 class="text-center text-secondary text-xs font-weight-semibold opacity-7">
                                                 Data Kosong</td>
                                         </tr>

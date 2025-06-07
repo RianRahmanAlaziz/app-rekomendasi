@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\PupukController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SliderController;
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('/data-pupuk', PupukController::class);
     Route::resource('/data-usia', UsiaController::class);
     Route::resource('/data-slider', SliderController::class);
+    Route::get('/perhitungan', [PerhitunganController::class, 'index']);
+    Route::get('/hasil', [PerhitunganController::class, 'perhitungan']);
 });
 
 Route::middleware(['auth'])->group(function () {

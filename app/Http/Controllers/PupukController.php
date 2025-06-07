@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pupuk;
+use App\Models\Usia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -16,7 +17,8 @@ class PupukController extends Controller
     {
         return view('dashboard.pupuk.index', [
             'title' => 'Data Pupuk',
-            'pupuks' => Pupuk::paginate(5)
+            'pupuks' => Pupuk::paginate(5),
+            'usias' => Usia::all()
         ]);
     }
 
@@ -37,6 +39,8 @@ class PupukController extends Controller
             'nama' => 'required',
             'slug' => 'required|unique:pupuks',
             'harga' => 'required',
+            'usia_id' => 'required',
+            'rating' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
@@ -76,12 +80,15 @@ class PupukController extends Controller
         $pupuk = Pupuk::findOrFail($id);
         $rules = [
             'nama' => 'required',
+            'slug' => 'required|unique:pupuks',
             'harga' => 'required',
+            'usia_id' => 'required',
+            'rating' => 'required',
             'deskripsi' => 'required',
         ];
 
         if ($request->slug != $pupuk->slug) {
-            $rules['slug'] = 'required|unique:tanamans';
+            $rules['slug'] = 'required|unique:pupuks';
         }
         $validator = $request->validate($rules);
 

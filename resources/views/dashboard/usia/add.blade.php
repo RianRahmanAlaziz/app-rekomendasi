@@ -3,54 +3,26 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Data Pupuk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Data Usia Tanam</h5>
             </div>
             <form action="/dashboard/data-usia" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <main class="form-signin w-100 m-auto">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nama">Usia Tanam</label>
-                                    <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                        name="nama" id="nama" required autofocus value="{{ old('nama') }}">
-                                    @error('nama')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" name="slug" id="slug"
-                                value="{{ old('slug') }}">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="pupuk_id">Pupuk</label>
-                                    <select class="form-select" name="pupuk_id">
-                                        <option disabled selected>Pilih Pupuk</option>
-                                        @foreach ($pupuk as $pupuk)
-                                            @if (old('pupuk_id') == $pupuk->id)
-                                                <option value="{{ $pupuk->id }}" selected>{{ $pupuk->nama }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $pupuk->id }}">{{ $pupuk->nama }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" id="deskripsi" cols="5" rows="5"
-                                class="form-control @error('deskripsi') is-invalid @enderror"></textarea>
-                            @error('deskripsi')
+                            <label for="nama">Usia Tanam</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                name="nama" id="nama" required autofocus value="{{ old('nama') }}">
+                            @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
+                        <input type="text" class="form-control" name="slug" id="slug"
+                            value="{{ old('slug') }}" hidden>
+
                     </main>
                 </div>
                 <div class="modal-footer">

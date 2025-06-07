@@ -39,17 +39,50 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" class="form-control @error('harga') is-invalid @enderror"
-                                    name="harga" id="harga" required autofocus
-                                    value="{{ old('harga', $pupuk->harga) }}">
-                                @error('harga')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="usia_id">Usia</label>
+                                        <select class="form-select" name="usia_id">
+                                            <option disabled selected>Pilih Usia</option>
+                                            @foreach ($usias as $usia)
+                                                @if (old('usia_id', $pupuk->usia_id) == $usia->id)
+                                                    <option value="{{ $usia->id }}" selected>{{ $usia->nama }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $usia->id }}">{{ $usia->nama }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
-                                @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="harga">Harga</label>
+                                        <input type="number" class="form-control @error('harga') is-invalid @enderror"
+                                            name="harga" id="harga" required autofocus
+                                            value="{{ old('harga', $pupuk->harga) }}">
+                                        @error('harga')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="rating">Rating</label>
+                                        <input type="number" class="form-control @error('rating') is-invalid @enderror"
+                                            name="rating" id="rating" required autofocus min="1"
+                                            max="5" value="{{ old('rating', $pupuk->rating) }}">
+                                        @error('rating')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
